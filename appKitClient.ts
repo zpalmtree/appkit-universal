@@ -3,7 +3,7 @@ import { Web3ModalScaffold } from '@web3modal/scaffold'
 import { ConstantsUtil, PresetsUtil } from '@web3modal/scaffold-utils'
 import { ConstantsUtil as CommonConstantsUtil } from '@web3modal/common'
 import { type ConnectParams, UniversalProvider } from '@walletconnect/universal-provider'
-import { ApiController } from '@web3modal/core'
+import { ApiController, OptionsController } from '@web3modal/core'
 // -- Types ---------------------------------------------------------------------
 
 export type Web3ModalClientOptions = Omit<LibraryOptions, 'defaultChain' | 'tokens' | '_sdkVersion'> & {
@@ -33,6 +33,8 @@ export class WalletConnectModal extends Web3ModalScaffold {
 		if (!w3mOptions.projectId) {
 			throw new Error('web3modal:constructor - projectId is undefined')
 		}
+
+        OptionsController.setProjectId(w3mOptions.projectId);
 
 		const networkControllerClient: NetworkControllerClient = {
 			switchCaipNetwork: async (caipNetwork) => {
